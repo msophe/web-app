@@ -64,6 +64,15 @@ export const environment = {
     redirectUri: loadedEnv.oauthRedirectUri || '',
     scope: loadedEnv.oauthScope || ''
   },
+  saccoMode: {
+    enabled: true,
+    savingsMultiplier: 3,
+    mandatorySavingsShortName: 'AKBL',
+    sharePrice: 10000,
+    hideMicrofinanceCenters: true,
+    hideCollectionSheets: true,
+    tenantBaseDomain: ''
+  },
   /** Feature flag for Remember Me functionality */
   enableRememberMe: false,
   warningDialog: {
@@ -86,7 +95,7 @@ export const environment = {
   displayTenantSelector: loadedEnv['displayTenantSelector'] || 'true',
   /** Production mode - when true, shows minimal hero with only branding at bottom */
   productionMode: loadedEnv['productionMode'] === 'true' || loadedEnv['productionMode'] === true || false,
-  tenantLogoUrl: loadedEnv['tenantLogoUrl'] || 'assets/images/default_home.png',
+  tenantLogoUrl: loadedEnv['tenantLogoUrl'] || 'assets/images/devops-logo.png',
   tenantLogoUrlDark: loadedEnv['tenantLogoUrlDark'] || 'assets/images/white-mifos.png',
   documentationBaseUrl: loadedEnv['documentationBaseUrl'] || 'https://mifosforge.jira.com/wiki',
   // Time in seconds, default 60 seconds

@@ -42,7 +42,7 @@ export const environment = {
   version: env.mifos_x.version,
   hash: env.mifos_x.hash,
   // For connecting to server running elsewhere update the tenant identifier
-  fineractPlatformTenantId: loadedEnv.fineractPlatformTenantId || 'default',
+  fineractPlatformTenantId: loadedEnv.fineractPlatformTenantId || '',
   fineractPlatformTenantIds: loadedEnv.fineractPlatformTenantIds || 'default',
   // For connecting to others servers running elsewhere update the base API URL
   baseApiUrls:
@@ -74,6 +74,15 @@ export const environment = {
       'This system is for authorized use only. Unauthorized access will result in possible legal action. By accessing this system, you acknowledge that you are authorized to do so and that all data stored and processed here is confidential.',
     buttonText: 'Close'
   },
+  saccoMode: {
+    enabled: true,
+    savingsMultiplier: 3,
+    mandatorySavingsShortName: 'AKBL',
+    sharePrice: 10000,
+    hideMicrofinanceCenters: true,
+    hideCollectionSheets: true,
+    tenantBaseDomain: ''
+  },
   defaultLanguage: loadedEnv.defaultLanguage || 'en-US',
   supportedLanguages:
     loadedEnv.supportedLanguages || 'az-AZ,cs-CS,de-DE,en-US,es-MX,fr-FR,it-IT,ko-KO,lt-LT,lv-LV,ne-NE,pt-PT,sw-SW',
@@ -88,7 +97,7 @@ export const environment = {
   displayTenantSelector: loadedEnv.displayTenantSelector || 'true',
   /** Production mode - when true, shows minimal hero with only branding at bottom */
   productionMode: loadedEnv.productionMode === 'true' || loadedEnv.productionMode === true || false,
-  tenantLogoUrl: loadedEnv.tenantLogoUrl || 'assets/images/default_home.png',
+  tenantLogoUrl: loadedEnv.tenantLogoUrl || 'assets/images/devops-logo.png',
   tenantLogoUrlDark: loadedEnv.tenantLogoUrlDark || 'assets/images/white-mifos.png',
   documentationBaseUrl: loadedEnv.documentationBaseUrl || 'https://mifosforge.jira.com/wiki',
   // Time in seconds, default 60 seconds

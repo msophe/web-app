@@ -15,8 +15,8 @@
   <div class="navigation-panel layout-column">
     <!-- TODO: Allow customization by organization -->
     <div class="app-brand" [routerLink]="['/home']">
-      <img src="assets/images/MifosX_logo.png" alt="app-logo" class="app-logo" />
-      <span #logo class="app-logo-text text-muted">{{ 'APP_NAME' | translate }}</span>
+      <img src="assets/images/devops-logo.png" alt="app-logo" class="app-logo" />
+      <span #logo class="app-logo-text text-muted">{{ 'MIFOS CBS' | translate }}</span>
     </div>
 
     <div class="app-user">
@@ -125,32 +125,34 @@
           </mat-icon>
           <a matLine>{{ 'labels.menus.Checker Inbox and Tasks' | translate }}</a>
         </mat-list-item>
-        <mat-list-item
-          [routerLink]="['/collections/collection-sheet']"
-          [matTooltipPosition]="tooltipPosition"
-          matTooltip="{{ 'labels.menus.Collection Sheet' | translate }}"
-          routerLinkActive="active-menu"
-          [routerLinkActiveOptions]="{ exact: false }"
-          *mifosxHasPermission="'READ_COLLECTIONSHEET'"
-        >
-          <mat-icon matListIcon>
-            <i class="fa fa-tasks"></i>
-          </mat-icon>
-          <a matLine>{{ 'labels.menus.Collection Sheet' | translate }}</a>
-        </mat-list-item>
-        <mat-list-item
-          [routerLink]="['/collections/individual-collection-sheet']"
-          [matTooltipPosition]="tooltipPosition"
-          matTooltip="{{ 'tooltips.Individual Collection Sheet' | translate }}"
-          routerLinkActive="active-menu"
-          [routerLinkActiveOptions]="{ exact: false }"
-          *mifosxHasPermission="'READ_COLLECTIONSHEET'"
-        >
-          <mat-icon matListIcon>
-            <i class="fa fa-tasks"></i>
-          </mat-icon>
-          <a matLine>{{ 'labels.menus.Individual Collection Sheet' | translate }}</a>
-        </mat-list-item>
+        @if (!saccoMode?.hideCollectionSheets) {
+          <mat-list-item
+            [routerLink]="['/collections/collection-sheet']"
+            [matTooltipPosition]="tooltipPosition"
+            matTooltip="{{ 'labels.menus.Collection Sheet' | translate }}"
+            routerLinkActive="active-menu"
+            [routerLinkActiveOptions]="{ exact: false }"
+            *mifosxHasPermission="'READ_COLLECTIONSHEET'"
+          >
+            <mat-icon matListIcon>
+              <i class="fa fa-tasks"></i>
+            </mat-icon>
+            <a matLine>{{ 'labels.menus.Collection Sheet' | translate }}</a>
+          </mat-list-item>
+          <mat-list-item
+            [routerLink]="['/collections/individual-collection-sheet']"
+            [matTooltipPosition]="tooltipPosition"
+            matTooltip="{{ 'tooltips.Individual Collection Sheet' | translate }}"
+            routerLinkActive="active-menu"
+            [routerLinkActiveOptions]="{ exact: false }"
+            *mifosxHasPermission="'READ_COLLECTIONSHEET'"
+          >
+            <mat-icon matListIcon>
+              <i class="fa fa-tasks"></i>
+            </mat-icon>
+            <a matLine>{{ 'labels.menus.Individual Collection Sheet' | translate }}</a>
+          </mat-list-item>
+        }
         <mat-list-item
           *ngIf="mifosRemittanceEnabled"
           [routerLink]="['/remittances/process']"

@@ -71,6 +71,7 @@ import { catchError, finalize, of, take } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidenavComponent implements OnInit, AfterViewInit {
+  readonly saccoMode = environment.saccoMode; //saccos mode
   readonly cbIldEnabled = environment.cbIldEnabled;
   private router = inject(Router);
   dialog = inject(MatDialog);

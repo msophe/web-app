@@ -163,9 +163,11 @@
   <button mat-menu-item routerLink="/groups" tabindex="0" *mifosxHasPermission="'READ_GROUP'">
     {{ 'labels.menus.Groups' | translate }}
   </button>
-  <button mat-menu-item routerLink="/centers" tabindex="0" *mifosxHasPermission="'READ_CENTER'">
-    {{ 'labels.menus.Centers' | translate }}
-  </button>
+  @if (!saccoMode?.hideMicrofinanceCenters) {
+    <button mat-menu-item routerLink="/centers" tabindex="0" *mifosxHasPermission="'READ_CENTER'">
+      {{ 'labels.menus.Centers' | translate }}
+    </button>
+  }
   <span class="hide-lt-md">
     <button
       mat-menu-item

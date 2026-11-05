@@ -284,6 +284,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       return;
     }
     target.onerror = null;
-    target.src = `assets/images/default_home.png`;
+    target.src = `assets/images/devops-logo.png`;
   }
 }

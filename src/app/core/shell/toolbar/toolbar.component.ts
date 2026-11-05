@@ -29,6 +29,9 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 
+//environment import for saccos mode
+import { environment } from 'environments/environment';
+
 /** rxjs Imports */
 import { Observable, of } from 'rxjs';
 import { catchError, finalize, map, take } from 'rxjs/operators';
@@ -80,6 +83,7 @@ import { LogoutDialogComponent } from 'app/shared/logout-dialog/logout-dialog.co
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent implements OnInit, AfterViewInit, AfterContentChecked {
+  readonly saccoMode = environment.saccoMode;
   private breakpointObserver = inject(BreakpointObserver);
   private router = inject(Router);
   private authenticationService = inject(AuthenticationService);

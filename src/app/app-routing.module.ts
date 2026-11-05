@@ -10,6 +10,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+//Saccos mode
+import { hideCentersGuard, hideCollectionSheetsGuard } from './core/guards/sacco-mode.guard';
+
 // Not Found Component
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CallbackComponent } from './zitadel/callback/callback.component';
@@ -33,12 +36,22 @@ const routes: Routes = [
     loadChildren: () => import('./centers/centers.module').then((m) => m.CentersModule)
   },
   {
+    path: 'centers',
+    canActivate: [hideCentersGuard],
+    loadChildren: () => import('./centers/centers.module').then((m) => m.CentersModule) //guard activate
+  },
+  {
     path: 'clients',
     loadChildren: () => import('./clients/clients.module').then((m) => m.ClientsModule)
   },
   {
     path: 'collections',
     loadChildren: () => import('./collections/collections.module').then((m) => m.CollectionsModule)
+  },
+  {
+    path: 'collections',
+    canActivate: [hideCollectionSheetsGuard],
+    loadChildren: () => import('./collections/collections.module').then((m) => m.CollectionsModule) //guard activate
   },
   {
     path: 'groups',

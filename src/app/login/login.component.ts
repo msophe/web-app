@@ -248,7 +248,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogoError(): void {
-    this.logoPath = 'assets/images/default_home.png';
+    this.logoPath = 'assets/images/devops-logo.png';
   }
 
   onLogoErrorDark(): void {
