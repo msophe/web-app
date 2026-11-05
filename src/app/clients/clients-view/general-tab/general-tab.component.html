@@ -7,6 +7,34 @@
 -->
 
 <div class="tab-container">
+  <!-- ════ SACCO LOAN ELIGIBILITY — advisory only ═══════════════ -->
+  @if (saccoMode?.enabled) {
+    <section class="section">
+      <div class="section-head">
+        <span class="section-title">Loan Eligibility (Kiwango cha Mkopo)</span>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card savings">
+          <span class="kpi-label">Mandatory Savings (Akiba ya Lazima)</span>
+          <span class="kpi-value">{{ saccoCurrencyCode }} {{ mandatorySavings | formatNumber: '' : 0 }}</span>
+        </div>
+        <div class="kpi-card shares">
+          <span class="kpi-label">Shares (Hisa)</span>
+          <span class="kpi-value">{{ saccoCurrencyCode }} {{ totalSharesValue | formatNumber: '' : 0 }}</span>
+        </div>
+        <div class="kpi-card loan">
+          <span class="kpi-label">Active Loan Balance (Deni)</span>
+          <span class="kpi-value">{{ saccoCurrencyCode }} {{ totalActiveLoanBalance | formatNumber: '' : 0 }}</span>
+        </div>
+        <div class="kpi-card eligibility">
+          <span class="kpi-label">{{ saccoMode.savingsMultiplier }}x Net Loan Eligibility (Kiwango cha Mkopo)</span>
+          <span class="kpi-value">{{ saccoCurrencyCode }} {{ netLoanEligibility | formatNumber: '' : 0 }}</span>
+          <span class="kpi-sub">Advisory only</span>
+        </div>
+      </div>
+    </section>
+  }
+
   <!-- ════ PERFORMANCE HISTORY — KPI cards ════════════════════ -->
   <section class="section">
     <div class="section-head">

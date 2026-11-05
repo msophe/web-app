@@ -43,6 +43,14 @@ import { AlertService } from 'app/core/alert/alert.service';
 import { EMPTY } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { LoanProductService } from 'app/products/loan-products/services/loan-product.service';
+import { environment } from 'environments/environment';
+import {
+  mandatoryCurrencyCode,
+  mandatorySavings,
+  netLoanEligibility,
+  totalActiveLoanBalance,
+  totalSharesValue
+} from 'app/core/utils/sacco-eligibility';
 
 /**
  * General Tab component.
@@ -265,6 +273,34 @@ export class GeneralTabComponent implements OnDestroy {
 
   /** Client Id */
   clientid: any;
+
+  /** SACCO mode settings; the eligibility card renders only when enabled. */
+  readonly saccoMode = environment.saccoMode;
+
+  /** Balance of active mandatory savings (Akiba ya Lazima) accounts. */
+  get mandatorySavings(): number {
+    return mandatorySavings(this.clientAccountData?.savingsAccounts, this.saccoMode.mandatorySavingsShortName);
+  }
+
+  /** Approved shares in active share accounts at the configured share price. */
+  get totalSharesValue(): number {
+    return totalSharesValue(this.clientAccountData?.shareAccounts, this.saccoMode.sharePrice);
+  }
+
+  /** Outstanding balance across active loans. */
+  get totalActiveLoanBalance(): number {
+    return totalActiveLoanBalance(this.clientAccountData?.loanAccounts);
+  }
+
+  /** Advisory loan limit: mandatory savings × multiplier, less active loan balance, never negative. */
+  get netLoanEligibility(): number {
+    return netLoanEligibility(this.mandatorySavings, this.totalActiveLoanBalance, this.saccoMode.savingsMultiplier);
+  }
+
+  /** Currency of the mandatory savings account, used to label the eligibility figures. */
+  get saccoCurrencyCode(): string {
+    return mandatoryCurrencyCode(this.clientAccountData?.savingsAccounts, this.saccoMode.mandatorySavingsShortName);
+  }
 
   /**
    * @param {ActivatedRoute} route Activated Route

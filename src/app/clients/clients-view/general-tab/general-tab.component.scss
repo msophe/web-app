@@ -144,6 +144,22 @@
   &.savings::before {
     background: var(--pr-savings);
   }
+
+  &.shares::before {
+    background: var(--pr-shares);
+  }
+
+  &.loan::before {
+    background: var(--ch-alert);
+  }
+
+  &.eligibility {
+    background: var(--pr-savings-bg);
+
+    &::before {
+      background: var(--pr-savings);
+    }
+  }
 }
 
 .kpi-label {
