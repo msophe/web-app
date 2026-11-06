@@ -50,12 +50,11 @@
       </mat-autocomplete>
     </mat-card-content>
 
-    <img
-      mat-card-image
-      [src]="'assets/images/' + tenant + '_home.png'"
-      (error)="onImageMissing($event)"
-      alt="Mifos X"
-    />
+    @if (branding.homeImageUrl) {
+      <div class="home-image">
+        <img [src]="branding.homeImageUrl" (error)="onImageMissing($event)" [alt]="branding.appName" />
+      </div>
+    }
   </mat-card>
 </div>
 

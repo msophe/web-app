@@ -954,6 +954,12 @@
     "validation.msg.WORKINGCAPITALLOAN.transactionAmount.delta.amount.should.not.result.in.negative": "Marekebisho hayawezi kupunguza muamala chini ya sifuri."
   },
   "labels": {
+    "branding": {
+      "Tagline": "Huduma jumuishi za kifedha, zilizojengwa kwa ajili ya SACCOS za Tanzania.",
+      "Feature compliance": "Inazingatia masharti ya TCDC na BoT",
+      "Feature mobile money": "Tayari kwa pesa za simu",
+      "Feature built for saccos": "Imejengwa kwa ajili ya SACCOS"
+    },
     "Mifos Reporting Plugin for Eclipse Birt": "Mifos Reporting Plugin for Eclipse Birt",
     "version": {
       "Tenant": "Mpangaji",

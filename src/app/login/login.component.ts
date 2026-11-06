@@ -33,6 +33,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 /** Environment Imports */
 import { environment } from '../../environments/environment';
+import { DEFAULT_BRAND_LOGO } from '../../environments/branding';
 import { SettingsService } from 'app/settings/settings.service';
 import { LanguageSelectorComponent } from '../shared/language-selector/language-selector.component';
 import { ThemeToggleComponent } from '../shared/theme-toggle/theme-toggle.component';
@@ -92,6 +93,10 @@ export class LoginComponent implements OnInit {
   private authenticationService = inject(AuthenticationService);
 
   public environment = environment;
+  /** Platform branding: hero heading, background, buttons and logos. */
+  readonly branding = environment.branding;
+  /** CSS background-image value for the hero panel. */
+  readonly heroBackgroundImage = `url("${environment.branding.loginBackgroundUrl.replace(/"/g, '%22')}")`;
 
   /** Version info for display */
   versions: VersionInfo = {};
@@ -108,8 +113,8 @@ export class LoginComponent implements OnInit {
   resetPassword = false;
   /** True if user requires two factor authentication. */
   twoFactorAuthenticationRequired = false;
-  logoPath = 'assets/images/default_home.png';
-  logoPathDark = 'assets/images/white-mifos.png';
+  logoPath = environment.branding.logoUrl;
+  logoPathDark = environment.branding.logoDarkUrl;
 
   themeDarkEnabled: boolean = false;
 
@@ -229,29 +234,15 @@ export class LoginComponent implements OnInit {
   }
 
   updateLogo(): void {
-    const tenant = this.settingsService.tenantIdentifier;
-    const isTenantSpecific = tenant && tenant !== 'default';
-
-    // Set light mode logo (env override takes priority)
-    if (environment.tenantLogoUrl && environment.tenantLogoUrl.trim() !== '') {
-      this.logoPath = environment.tenantLogoUrl;
-    } else {
-      this.logoPath = isTenantSpecific ? `assets/images/${tenant}_home.png` : 'assets/images/default_home.png';
-    }
-
-    // Set dark mode logo (env override takes priority)
-    if (environment.tenantLogoUrlDark && environment.tenantLogoUrlDark.trim() !== '') {
-      this.logoPathDark = environment.tenantLogoUrlDark;
-    } else {
-      this.logoPathDark = isTenantSpecific ? `assets/images/${tenant}_home_dark.png` : 'assets/images/white-mifos.png';
-    }
+    this.logoPath = this.branding.logoUrl;
+    this.logoPathDark = this.branding.logoDarkUrl;
   }
 
   onLogoError(): void {
-    this.logoPath = 'assets/images/devops-logo.png';
+    this.logoPath = DEFAULT_BRAND_LOGO;
   }
 
   onLogoErrorDark(): void {
-    this.logoPathDark = 'assets/images/white-mifos.png';
+    this.logoPathDark = DEFAULT_BRAND_LOGO;
   }
 }

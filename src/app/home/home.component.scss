@@ -9,6 +9,18 @@
 .container {
   max-width: 37rem;
 
+  .home-image {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+
+    img {
+      max-width: 100%;
+      max-height: 160px;
+      object-fit: contain;
+    }
+  }
+
   .title {
     font-size: 1.25rem;
     font-weight: 500;

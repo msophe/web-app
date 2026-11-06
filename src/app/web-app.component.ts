@@ -194,10 +194,7 @@ export class WebAppComponent implements OnInit, OnDestroy {
       .subscribe((event) => {
         const rawTitle = event['title'];
         if (!rawTitle) {
-          this.i18nService
-            .translate('APP_NAME')
-            .pipe(take(1))
-            .subscribe((t: any) => this.titleService.setTitle(t));
+          this.titleService.setTitle(environment.branding.appName);
           return;
         }
         const translationKey = rawTitle.includes('.') ? rawTitle : `labels.text.${rawTitle}`;

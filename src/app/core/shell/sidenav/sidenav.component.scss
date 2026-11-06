@@ -33,6 +33,7 @@
       width: auto;
       height: 42px;
       margin-right: 8px;
+      border-radius: 4px;
     }
 
     .app-logo-text {
@@ -40,6 +41,9 @@
       height: auto;
       font-size: 2rem;
       font-weight: normal;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 

@@ -164,11 +164,12 @@
 .hero-panel {
   flex: 0 0 70%;
   position: relative;
-  background: url('../../assets/images/cover_image_resized.webp') no-repeat center center;
+  // Set from environment.branding.loginBackgroundUrl in login.component.ts
+  background: var(--hero-background-image) no-repeat center center;
   background-size: cover;
   overflow: hidden;
 
-  // Overlay removed for clean image view
+  // Dark gradient keeps the white hero text readable over a busy photo in both themes
   .hero-overlay {
     position: absolute;
     /* stylelint-disable declaration-block-no-redundant-longhand-properties -- Safari compatibility */
@@ -177,7 +178,7 @@
     bottom: 0;
     left: 0;
     /* stylelint-enable declaration-block-no-redundant-longhand-properties */
-    background: transparent;
+    background: linear-gradient(135deg, rgb(10 18 48 / 70%) 0%, rgb(10 18 48 / 35%) 100%);
     z-index: 1;
   }
 
@@ -197,8 +198,7 @@
     color: #fff;
     animation: fade-in-up 0.8s ease-out;
     flex: 0 1 auto;
-    // Minimal backdrop - more image visibility
-    background: rgb(0 0 0 / 35%);
+    background: rgb(0 0 0 / 55%);
     border-radius: 20px;
     padding: 2rem;
     border: 1px solid rgb(255 255 255 / 15%);

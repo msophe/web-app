@@ -21,6 +21,7 @@ import { ActivatedRoute, Router, NavigationEnd, RouterLink } from '@angular/rout
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from '../../environments/environment';
+import { DEFAULT_BRAND_LOGO } from '../../environments/branding';
 
 /** rxjs Imports */
 import { Observable } from 'rxjs';
@@ -40,7 +41,7 @@ import { TranslateService } from '@ngx-translate/core';
 /** Custom Components */
 import { NextStepDialogComponent } from '../configuration-wizard/next-step-dialog/next-step-dialog.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardImage } from '@angular/material/card';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
 import { MatAutocompleteTrigger, MatAutocomplete, MatOption } from '@angular/material/autocomplete';
 import { AsyncPipe } from '@angular/common';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -60,7 +61,6 @@ import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
     MatCardTitle,
     MatAutocompleteTrigger,
     MatAutocomplete,
-    MatCardImage,
     AsyncPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -76,6 +76,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private translateService = inject(TranslateService);
 
   enableGlobalDashboard = environment.enableGlobalDashboard === true;
+  /** Platform branding: welcome card image. */
+  readonly branding = environment.branding;
 
   /** Username of authenticated user. */
   username: string;
@@ -284,6 +286,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       return;
     }
     target.onerror = null;
-    target.src = `assets/images/devops-logo.png`;
+    target.src = DEFAULT_BRAND_LOGO;
   }
 }

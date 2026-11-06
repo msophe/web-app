@@ -72,6 +72,8 @@ import { catchError, finalize, of, take } from 'rxjs';
 })
 export class SidenavComponent implements OnInit, AfterViewInit {
   readonly saccoMode = environment.saccoMode; //saccos mode
+  /** Platform branding: sidenav logo and short name. */
+  readonly branding = environment.branding;
   readonly cbIldEnabled = environment.cbIldEnabled;
   private router = inject(Router);
   dialog = inject(MatDialog);

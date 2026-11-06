@@ -1,17 +1,17 @@
 {
-  "short_name": "Mifos® X",
-  "name": "Mifos® X Web App",
+  "short_name": "SACCO Core",
+  "name": "SACCO Core Banking",
   "start_url": "/",
   "scope": "/",
-  "theme_color": "#fff",
+  "theme_color": "#283593",
   "background_color": "#fff",
   "display": "standalone",
-  "description": "Mifos® X Web App is the default web application built on top of the Apache Fineract® platform for the Mifos® user community leveraging the popular Angular framework.",
+  "description": "Financial inclusion, built for Tanzanian SACCOS.",
   "icons": [
     {
-      "src": "assets/images/MifosX_logo.png",
-      "sizes": "182x184",
-      "type": "image/png"
+      "src": "assets/images/branding/agakhansaccos-logo.jpg",
+      "sizes": "447x447",
+      "type": "image/jpeg"
     }
   ]
 }

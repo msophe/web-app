@@ -27,6 +27,14 @@
   window['env']['tenantLogoUrl'] = '$TENANT_LOGO_URL';
   window['env']['tenantLogoUrlDark'] = '$TENANT_LOGO_URL_DARK';
 
+  // Platform branding (empty = bundled default, see src/environments/branding.ts)
+  window['env']['brandAppName'] = '$MIFOS_BRAND_APP_NAME';
+  window['env']['brandShortName'] = '$MIFOS_BRAND_SHORT_NAME';
+  window['env']['brandLogoSmallUrl'] = '$MIFOS_BRAND_LOGO_SMALL_URL';
+  window['env']['brandLoginBackgroundUrl'] = '$MIFOS_BRAND_LOGIN_BACKGROUND_URL';
+  // Set to 'none' to hide the image in the home welcome card
+  window['env']['brandHomeImageUrl'] = '$MIFOS_BRAND_HOME_IMAGE_URL';
+
   // Language Environment variables
   window['env']['defaultLanguage'] = '$MIFOS_DEFAULT_LANGUAGE';
 

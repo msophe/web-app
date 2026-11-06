@@ -8,53 +8,48 @@
 <!-- Modern Material Design 3 Login Layout -->
 <div class="login-wrapper">
   <!-- Left Panel - Hero Section (Hidden on tablet and mobile) -->
-  <div class="hero-panel hide-lt-lg" [class.production-mode]="productionMode">
+  <div
+    class="hero-panel hide-lt-lg"
+    [class.production-mode]="productionMode"
+    [style.--hero-background-image]="heroBackgroundImage"
+  >
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <!-- Default Mode: Full content -->
       @if (!productionMode) {
         <div class="hero-text">
-          <h1 class="hero-title">{{ 'APP_NAME' | translate }}</h1>
-          <p class="hero-subtitle">
-            {{ 'labels.text.A' | translate }}
-            <span class="hero-highlight">{{ 'labels.text.global community' | translate }}</span>
-            {{ 'labels.text.elimination of poverty' | translate }}
-          </p>
+          <h1 class="hero-title">{{ branding.appName }}</h1>
+          <p class="hero-subtitle">{{ 'labels.branding.Tagline' | translate }}</p>
           <div class="hero-features">
             <div class="feature-item">
               <fa-icon icon="shield-alt" class="feature-icon"></fa-icon>
-              <span class="feature-text">{{ 'labels.heading.Secure & Reliable' | translate }}</span>
+              <span class="feature-text">{{ 'labels.branding.Feature compliance' | translate }}</span>
+            </div>
+            <div class="feature-item">
+              <fa-icon icon="mobile-alt" class="feature-icon"></fa-icon>
+              <span class="feature-text">{{ 'labels.branding.Feature mobile money' | translate }}</span>
             </div>
             <div class="feature-item">
               <fa-icon icon="users" class="feature-icon"></fa-icon>
-              <span class="feature-text">{{ 'labels.heading.Community Driven' | translate }}</span>
-            </div>
-            <div class="feature-item">
-              <fa-icon icon="globe" class="feature-icon"></fa-icon>
-              <span class="feature-text">{{ 'labels.heading.Global Impact' | translate }}</span>
+              <span class="feature-text">{{ 'labels.branding.Feature built for saccos' | translate }}</span>
             </div>
           </div>
-          <div class="hero-links">
-            <a [href]="'mifosHome' | documentationLink" target="_blank" rel="noopener noreferrer" class="hero-link">
-              {{ 'labels.text.Mifos Initiative' | translate }}
-              <fa-icon icon="external-link-alt" size="sm"></fa-icon>
-            </a>
-            <a
-              [href]="'mifosVolunteer' | documentationLink"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="hero-link"
-            >
-              {{ 'labels.text.Get involved' | translate }}
-              <fa-icon icon="external-link-alt" size="sm"></fa-icon>
-            </a>
-          </div>
+          @if (branding.featureLinks.length) {
+            <div class="hero-links">
+              @for (link of branding.featureLinks; track link.url) {
+                <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="hero-link">
+                  {{ link.labelKey | translate }}
+                  <fa-icon icon="external-link-alt" size="sm"></fa-icon>
+                </a>
+              }
+            </div>
+          }
         </div>
       }
       <!-- Production Mode: Minimal branding at bottom -->
       @if (productionMode) {
         <div class="hero-branding-bottom">
-          <h1 class="hero-title-minimal">{{ 'APP_NAME' | translate }}</h1>
+          <h1 class="hero-title-minimal">{{ branding.appName }}</h1>
         </div>
       }
     </div>
@@ -89,14 +84,9 @@
         <!-- Logo Section -->
         <div class="logo-section">
           @if (!themeDarkEnabled) {
-            <img [src]="logoPath" (error)="onLogoError()" alt="{{ 'APP_NAME' | translate }} Logo" class="logo-image" />
+            <img [src]="logoPath" (error)="onLogoError()" [alt]="branding.appName" class="logo-image" />
           } @else {
-            <img
-              [src]="logoPathDark"
-              (error)="onLogoErrorDark()"
-              alt="{{ 'APP_NAME' | translate }} Logo"
-              class="logo-image"
-            />
+            <img [src]="logoPathDark" (error)="onLogoErrorDark()" [alt]="branding.appName" class="logo-image" />
           }
         </div>
 

@@ -956,6 +956,12 @@
     "validation.msg.WORKINGCAPITALLOAN.transactionAmount.delta.amount.should.not.result.in.negative": "The adjustment cannot decrease the transaction below zero."
   },
   "labels": {
+    "branding": {
+      "Tagline": "Financial inclusion, built for Tanzanian SACCOS.",
+      "Feature compliance": "TCDC & BoT compliant",
+      "Feature mobile money": "Mobile-money ready",
+      "Feature built for saccos": "Built for SACCOS"
+    },
     "Mifos Reporting Plugin for Eclipse Birt": "Mifos Reporting Plugin for Eclipse Birt",
     "version": {
       "Tenant": "Tenant",
