@@ -16,8 +16,11 @@ import { ClientsService } from 'app/clients/clients.service';
 import { Dates } from 'app/core/utils/dates';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatIcon } from '@angular/material/icon';
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
 import { LoanAccountActionsBaseComponent } from '../loan-account-actions-base.component';
+import { environment } from 'environments/environment';
+import { SaccoEligibilitySummary, summarizeSaccoEligibility } from 'app/core/utils/sacco-eligibility';
 
 /**
  * Fineract guarantor type ids, as served by `GET /loans/{loanId}/guarantors/template`.
@@ -66,7 +69,8 @@ function clientPickedValidator(control: AbstractControl): ValidationErrors | nul
     ...STANDALONE_SHARED_IMPORTS,
     MatCheckbox,
     MatAutocompleteTrigger,
-    MatAutocomplete
+    MatAutocomplete,
+    MatIcon
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -91,6 +95,12 @@ export class CreateGuarantorComponent extends LoanAccountActionsBaseComponent im
   clientsData: any = [];
   /** Account Options */
   accountOptions: any = [];
+  /** SACCO mode settings; the committee banner and guarantor savings check render only when enabled. */
+  readonly saccoMode = environment.saccoMode;
+  /** Mandatory savings and active loan balance of the selected guarantor (SACCO mode only). */
+  guarantorEligibility: SaccoEligibilitySummary | null = null;
+  /** Client id whose accounts are being fetched, so a late response for an earlier pick is ignored. */
+  private guarantorEligibilityClientId: number | null = null;
 
   constructor() {
     super();
@@ -175,6 +185,7 @@ export class CreateGuarantorComponent extends LoanAccountActionsBaseComponent im
         this.newGuarantorForm.patchValue({ name: '', savingsId: '', amount: '' }, { emitEvent: false });
         this.clientsData = [];
         this.accountOptions = [];
+        this.clearGuarantorEligibility();
         this.cdr.markForCheck();
       });
   }
@@ -188,6 +199,9 @@ export class CreateGuarantorComponent extends LoanAccountActionsBaseComponent im
       .valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value: any) => {
         // Once an option is picked the control holds the client object, not the search string.
+        if (typeof value === 'string') {
+          this.clearGuarantorEligibility();
+        }
         if (typeof value === 'string' && value.length >= 2) {
           this.clientsService.getFilteredClients('displayName', 'ASC', true, value).subscribe((data: any) => {
             this.clientsData = data.pageItems;
@@ -225,6 +239,31 @@ export class CreateGuarantorComponent extends LoanAccountActionsBaseComponent im
       this.accountOptions = response.accountLinkingOptions || [];
       this.cdr.markForCheck();
     });
+    this.loadGuarantorEligibility(clientDetails.id);
+  }
+
+  /** Fetches the picked guarantor's accounts and summarises mandatory savings and active loan balance. */
+  private loadGuarantorEligibility(clientId: number) {
+    this.clearGuarantorEligibility();
+    if (!this.saccoMode?.enabled) {
+      return;
+    }
+    this.guarantorEligibilityClientId = clientId;
+    this.clientsService
+      .getClientAccountData(String(clientId))
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((accounts: any) => {
+        if (this.guarantorEligibilityClientId !== clientId) {
+          return;
+        }
+        this.guarantorEligibility = summarizeSaccoEligibility(accounts, this.saccoMode);
+        this.cdr.markForCheck();
+      });
+  }
+
+  private clearGuarantorEligibility() {
+    this.guarantorEligibilityClientId = null;
+    this.guarantorEligibility = null;
   }
 
   /**

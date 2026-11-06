@@ -8,6 +8,26 @@
 
 <div class="container mat-elevation-z8">
   <mat-card>
+    @if (saccoMode?.enabled) {
+      <div class="sacco-committee-banner" role="note">
+        <mat-icon>info_outline</mat-icon>
+        <div>
+          <p>
+            After adding guarantors, record the loan committee review in the
+            <strong>tz_loan_committee_review</strong> data table tab of this loan:
+          </p>
+          <ul>
+            <li>Minute reference (<code>minute_reference_no</code>)</li>
+            <li>
+              Applicant shares and savings verified (<code>applicant_shares_verified</code>,
+              <code>applicant_savings_verified</code>)
+            </li>
+            <li>Each guarantor's verified free savings (<code>guarantors_verified_Info</code>)</li>
+            <li>Committee decision (<code>committee_decision</code>)</li>
+          </ul>
+        </div>
+      </div>
+    }
     <form [formGroup]="newGuarantorForm" (ngSubmit)="submit()">
       <mat-card-content>
         <div class="layout-column">
@@ -40,6 +60,18 @@
                 </mat-option>
               }
             </mat-autocomplete>
+            @if (guarantorEligibility; as summary) {
+              <div class="sacco-guarantor-summary">
+                <span>
+                  Mandatory Savings (Akiba ya Lazima):
+                  <strong>{{ summary.currencyCode }} {{ summary.mandatorySavings | number: '1.0-0' }}</strong>
+                </span>
+                <span>
+                  Active Loan Balance (Deni):
+                  <strong>{{ summary.currencyCode }} {{ summary.totalActiveLoanBalance | number: '1.0-0' }}</strong>
+                </span>
+              </div>
+            }
             <mat-form-field>
               <mat-label>{{ 'labels.inputs.Relationship' | translate }}</mat-label>
               <mat-select formControlName="clientRelationshipTypeId">

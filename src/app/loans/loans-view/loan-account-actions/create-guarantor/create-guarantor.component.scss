@@ -35,3 +35,38 @@
     margin-bottom: 0;
   }
 }
+
+.sacco-committee-banner {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-left: 4px solid var(--mat-sys-primary);
+  border-radius: 4px;
+  background: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
+
+  mat-icon {
+    flex-shrink: 0;
+    color: var(--mat-sys-primary);
+  }
+
+  p,
+  ul {
+    margin: 0;
+  }
+
+  ul {
+    padding-left: 24px;
+    margin-top: 8px;
+  }
+}
+
+.sacco-guarantor-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-bottom: 16px;
+  color: var(--mat-sys-on-surface-variant);
+}
