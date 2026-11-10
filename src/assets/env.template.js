@@ -158,6 +158,9 @@
   // Client Address Location (latitude, longitude, and map)
   window['env']['enableClientAddressLocation'] = '$MIFOS_ENABLE_CLIENT_ADDRESS_LOCATION';
 
+  // Postal code lookup when entering client addresses (off unless 'true')
+  window['env']['enablePostalCodeLookup'] = '$MIFOS_ENABLE_POSTAL_CODE_LOOKUP';
+
   // OIDC Plugin Environment variables
   window['env']['oidcServerEnabled'] = '$FINERACT_PLUGIN_OIDC_ENABLED';
   window['env']['oidcBaseUrl'] = '$FINERACT_PLUGIN_OIDC_BASE_URL';

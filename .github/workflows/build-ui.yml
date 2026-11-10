@@ -1,0 +1,67 @@
+# Copyright since 2025 Mifos Initiative
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+# Builds the TZ SACCO web app image from the root Dockerfile and pushes it to GHCR.
+name: Build UI image (GHCR)
+
+on:
+  push:
+    branches: [tz-sacco-edition-dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: build-ui-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # A real checkout keeps .git in the build context: `npm ci` runs version.js (postinstall),
+      # which needs `git describe` to generate src/environments/.env.ts.
+      - uses: actions/checkout@v6
+
+      - name: Compute image name
+        id: image
+        # GHCR rejects uppercase repository names
+        run: echo "name=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/tz-sacco-web-app" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          build-args: |
+            PUPPETEER_SKIP_DOWNLOAD_ARG=true
+          tags: |
+            ${{ steps.image.outputs.name }}:${{ github.sha }}
+            ${{ steps.image.outputs.name }}:1.0
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.title=tz-sacco-web-app
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Image reference
+        run: |
+          echo "### Image pushed" >> "$GITHUB_STEP_SUMMARY"
+          echo "\`${{ steps.image.outputs.name }}:${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"
