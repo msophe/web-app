@@ -38,6 +38,7 @@ import { CreateRuleComponent } from './accounting-rules/create-rule/create-rule.
 import { ViewRuleComponent } from './accounting-rules/view-rule/view-rule.component';
 import { EditRuleComponent } from './accounting-rules/edit-rule/edit-rule.component';
 import { PeriodicAccrualsComponent } from './periodic-accruals/periodic-accruals.component';
+import { FinancialStatementsComponent } from './financial-statements/financial-statements.component';
 import { ProvisioningEntriesComponent } from './provisioning-entries/provisioning-entries.component';
 import { CreateProvisioningEntryComponent } from './provisioning-entries/create-provisioning-entry/create-provisioning-entry.component';
 import { ViewProvisioningEntryComponent } from './provisioning-entries/view-provisioning-entry/view-provisioning-entry.component';
@@ -324,6 +325,11 @@ const routes: Routes = [
           path: 'periodic-accruals',
           component: PeriodicAccrualsComponent,
           data: { title: 'Periodic Accrual Accounting', breadcrumb: 'Execute Periodic Accrual Accounting' }
+        },
+        {
+          path: 'financial-statements',
+          component: FinancialStatementsComponent,
+          data: { title: 'Financial Statements', breadcrumb: 'Financial Statements' }
         },
         {
           path: 'provisioning-entries',

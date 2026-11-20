@@ -1,0 +1,149 @@
+<!--
+  Copyright since 2025 Mifos Initiative
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+
+<div class="container fs-container">
+  <mat-card class="fs-form-card">
+    <form [formGroup]="form" (ngSubmit)="run()">
+      <mat-card-content>
+        <div class="fs-form">
+          <mat-form-field class="fs-kind">
+            <mat-label>{{ t('form.statement') }}</mat-label>
+            <mat-select formControlName="kind">
+              @for (k of kinds; track k) {
+                <mat-option [value]="k">{{ t('kind.' + k) }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>{{ t('form.office') }}</mat-label>
+            <mat-select formControlName="officeId">
+              @for (office of offices(); track office.id) {
+                <mat-option [value]="office.id">{{ office.nameDecorated || office.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          @if (showAccount()) {
+            <mat-form-field class="fs-account">
+              <mat-label>{{ t('form.account') }}</mat-label>
+              <mat-select formControlName="glAccountId">
+                @for (account of accounts(); track account.id) {
+                  <mat-option [value]="account.id">{{ account.glCode }} {{ account.name }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          }
+
+          @if (showStartDate()) {
+            <mat-form-field>
+              <mat-label>{{ t('form.startDate') }}</mat-label>
+              <input matInput [matDatepicker]="startPicker" formControlName="startDate" required />
+              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+              <mat-datepicker #startPicker></mat-datepicker>
+            </mat-form-field>
+          }
+
+          <mat-form-field>
+            <mat-label>{{ showStartDate() ? t('form.endDate') : t('form.asAt') }}</mat-label>
+            <input matInput [matDatepicker]="endPicker" formControlName="endDate" required />
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+          </mat-form-field>
+
+          @if (!showAccount() && kind() !== 'cash-flow') {
+            <mat-checkbox formControlName="showZero">{{ t('form.showZero') }}</mat-checkbox>
+          }
+        </div>
+        @if (kind() === 'balance-sheet') {
+          <p class="fs-note">{{ t('form.fyNote') }}</p>
+        }
+      </mat-card-content>
+      <mat-card-actions class="layout-row align-end gap-5px responsive-column">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading()">
+          <fa-icon icon="play" class="m-r-10"></fa-icon>{{ t('form.run') }}
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+
+  @if (statement(); as s) {
+    <mat-card class="fs-statement">
+      <mat-card-content>
+        <div class="fs-toolbar">
+          @if (previous()) {
+            <button mat-button type="button" (click)="back()">
+              <fa-icon icon="arrow-left" class="m-r-10"></fa-icon>{{ t('form.back') }}
+            </button>
+          }
+          <span class="fs-spacer"></span>
+          <button mat-raised-button type="button" (click)="exportPdf()">
+            <fa-icon icon="file-pdf" class="m-r-10"></fa-icon>{{ t('form.pdf') }}
+          </button>
+          <button mat-raised-button type="button" (click)="exportExcel()">
+            <fa-icon icon="file-excel" class="m-r-10"></fa-icon>{{ t('form.excel') }}
+          </button>
+        </div>
+
+        <div class="fs-header">
+          <h2>{{ s.title }}</h2>
+          <p>{{ periodText() }} &middot; {{ currencyCode }}</p>
+        </div>
+
+        @if (s.lines.length <= 1 && s.kind !== 'balance-sheet' && s.kind !== 'income-statement') {
+          <p class="fs-note">{{ t('form.noData') }}</p>
+        }
+
+        <div class="fs-table-wrap">
+          <table class="fs-table">
+            <thead>
+              <tr>
+                @for (c of s.textColumns; track $index) {
+                  <th>{{ c }}</th>
+                }
+                @for (c of s.numericColumns; track $index) {
+                  <th class="num">{{ c }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (line of s.lines; track $index) {
+                <tr [class]="'fs-' + line.kind" [class.fs-click]="isClickable(line)" (click)="drill(line)">
+                  @for (text of line.texts; track $index) {
+                    <td>{{ text }}</td>
+                  }
+                  @for (value of line.values; track $index) {
+                    <td class="num">{{ formatAmount(value) }}</td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        @if (s.kind !== 'general-ledger' && s.kind !== 'cash-flow') {
+          <p class="fs-note">{{ t('form.drillHint') }}</p>
+        }
+
+        @for (c of s.checks; track $index) {
+          <p [class]="c.ok ? 'fs-check-ok' : 'fs-check-fail'">
+            {{ c.label }}: {{ c.ok ? t('check.ok') : t('check.difference') + ' ' + formatAmount(c.difference) }}
+          </p>
+        }
+
+        @if (s.untaggedAccounts.length) {
+          <p class="fs-warn">{{ t('form.untagged') }} {{ s.untaggedAccounts.join(', ') }}</p>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
