@@ -83,7 +83,11 @@ export const environment = {
     sharePrice: 10000,
     hideMicrofinanceCenters: true,
     hideCollectionSheets: true,
-    tenantBaseDomain: ''
+    tenantBaseDomain: '',
+    financialYearStartMonth: 1,
+    currencyCode: 'TZS',
+    reportEntityName: '',
+    reportLogoUrl: 'assets/images/branding/agakhansaccos-logo.jpg'
   },
   defaultLanguage: loadedEnv.defaultLanguage || 'en-US',
   supportedLanguages:
