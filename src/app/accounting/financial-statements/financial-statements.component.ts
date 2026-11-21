@@ -10,8 +10,10 @@ import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } 
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { MatOptgroup } from '@angular/material/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { forkJoin } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { STANDALONE_SHARED_IMPORTS } from 'app/standalone-shared.module';
@@ -22,7 +24,15 @@ import { environment } from 'environments/environment';
 
 import { FinancialStatementsService } from './financial-statements.service';
 import { statementLabels } from './financial-statements.labels';
-import { STATEMENT_KINDS, Statement, StatementKind, StatementLine, StatementMeta } from './financial-statements.model';
+import {
+  AS_AT_KINDS,
+  STATEMENT_KINDS,
+  Statement,
+  StatementKind,
+  StatementLine,
+  StatementMeta,
+  TCDC_KINDS
+} from './financial-statements.model';
 import {
   buildBalanceSheet,
   buildCashFlow,
@@ -31,8 +41,10 @@ import {
   buildIncomeStatement,
   buildTrialBalance,
   financialYearStart,
-  formatAmount
+  formatAmount,
+  formatValue
 } from './statement-builder';
+import { buildTcdcForm1, buildTcdcForm2, buildTcdcForm3, financialQuarterStart } from './tcdc-forms';
 import { exportStatementExcel, exportStatementPdf } from './statement-export';
 
 /** Optional settings read from environment.saccoMode (Phase 3, Step 7). */
@@ -49,6 +61,7 @@ const SACCO: any = (environment as any).saccoMode || {};
   imports: [
     ...STANDALONE_SHARED_IMPORTS,
     MatCheckbox,
+    MatOptgroup,
     MatProgressBar,
     FaIconComponent
   ],
@@ -63,8 +76,10 @@ export class FinancialStatementsComponent implements OnInit {
   private router = inject(Router);
 
   readonly kinds = STATEMENT_KINDS;
+  readonly tcdcKinds = TCDC_KINDS;
   readonly t = statementLabels(this.settingsService.language?.code);
   readonly formatAmount = formatAmount;
+  readonly formatValue = formatValue;
   readonly fyStartMonth: number = Number(SACCO.financialYearStartMonth) || 1;
   readonly currencyCode: string = SACCO.currencyCode || 'TZS';
 
@@ -79,7 +94,8 @@ export class FinancialStatementsComponent implements OnInit {
   periodText = signal('');
 
   kind = signal<StatementKind>('balance-sheet');
-  showStartDate = computed(() => this.kind() !== 'balance-sheet');
+  showStartDate = computed(() => !AS_AT_KINDS.includes(this.kind()));
+  isTcdc = computed(() => TCDC_KINDS.includes(this.kind()));
   showAccount = computed(() => this.kind() === 'general-ledger');
 
   ngOnInit(): void {
@@ -132,18 +148,43 @@ export class FinancialStatementsComponent implements OnInit {
     const value = this.form.value;
     const kind: StatementKind = value.kind;
     const end: Date = value.endDate;
-    const start: Date = kind === 'balance-sheet' ? financialYearStart(end, this.fyStartMonth) : value.startDate || end;
+    const yearStart = financialYearStart(end, this.fyStartMonth);
+    const start: Date = AS_AT_KINDS.includes(kind) ? yearStart : value.startDate || end;
     const officeId = Number(value.officeId);
     const showZero = !!value.showZero;
     const t = this.t;
 
     this.periodText.set(
-      kind === 'balance-sheet'
+      AS_AT_KINDS.includes(kind)
         ? `${t('meta.asAt')} ${this.display(end)}`
         : `${t('meta.forPeriod')} ${this.display(start)} ${t('meta.to')} ${this.display(end)}`
     );
     this.loading.set(true);
     this.statement.set(null);
+
+    if (kind === 'tcdc-form-1' || kind === 'tcdc-form-3') {
+      forkJoin({
+        balances: this.service.getBalances(officeId, this.iso(yearStart), this.iso(end)),
+        loans: this.service.getLoanPortfolio(officeId, this.iso(end))
+      })
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe(({ balances, loans }) =>
+          this.statement.set(
+            kind === 'tcdc-form-1' ? buildTcdcForm1(balances, loans, t) : buildTcdcForm3(loans, balances, t)
+          )
+        );
+      return;
+    }
+    if (kind === 'tcdc-form-2') {
+      const quarterStart = financialQuarterStart(end, this.fyStartMonth);
+      forkJoin({
+        quarter: this.service.getBalances(officeId, this.iso(quarterStart), this.iso(end)),
+        year: this.service.getBalances(officeId, this.iso(yearStart), this.iso(end))
+      })
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe(({ quarter, year }) => this.statement.set(buildTcdcForm2(quarter, year, t)));
+      return;
+    }
 
     if (kind === 'cash-flow') {
       this.service
@@ -217,7 +258,7 @@ export class FinancialStatementsComponent implements OnInit {
     this.statement.set(prev.statement);
     const t = this.t;
     this.periodText.set(
-      prev.formValue.kind === 'balance-sheet'
+      AS_AT_KINDS.includes(prev.formValue.kind)
         ? `${t('meta.asAt')} ${this.display(prev.formValue.endDate)}`
         : `${t('meta.forPeriod')} ${this.display(prev.formValue.startDate)} ${t('meta.to')} ${this.display(prev.formValue.endDate)}`
     );

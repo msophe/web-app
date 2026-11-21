@@ -1,0 +1,1285 @@
+{
+  "asAt": "2026-11-26",
+  "balancesYear": {
+    "columnHeaders": [
+      {
+        "columnName": "gl_code"
+      },
+      {
+        "columnName": "account_name"
+      },
+      {
+        "columnName": "account_type"
+      },
+      {
+        "columnName": "account_id"
+      },
+      {
+        "columnName": "report_line"
+      },
+      {
+        "columnName": "opening_balance"
+      },
+      {
+        "columnName": "period_debit"
+      },
+      {
+        "columnName": "period_credit"
+      },
+      {
+        "columnName": "closing_balance"
+      }
+    ],
+    "data": [
+      {
+        "row": [
+          "1101",
+          "Cash at Vault and Teller",
+          1,
+          1,
+          "F1-3.1",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "1102",
+          "Settlement Account - Internal Payment Gateway",
+          1,
+          2,
+          "F1-3.2",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "1103",
+          "Bank Current Account",
+          1,
+          17,
+          "F1-3.2",
+          39400000.0,
+          7480000.0,
+          22740000.0,
+          24140000.0
+        ]
+      },
+      {
+        "row": [
+          "1201",
+          "Gross Loan Portfolio - Development Loans",
+          1,
+          3,
+          "F1-1",
+          500000.0,
+          14000000.0,
+          1700000.0,
+          12800000.0
+        ]
+      },
+      {
+        "row": [
+          "1202",
+          "Gross Loan Portfolio - Emergency Loans",
+          1,
+          4,
+          "F1-1",
+          600000.0,
+          1000000.0,
+          100000.0,
+          1500000.0
+        ]
+      },
+      {
+        "row": [
+          "1299",
+          "Allowance for Loan Impairment",
+          1,
+          5,
+          "F1-1.7",
+          0.0,
+          0.0,
+          1000000.0,
+          -1000000.0
+        ]
+      },
+      {
+        "row": [
+          "1304",
+          "Fixed Deposits in Financial Institutions (over 30 days)",
+          1,
+          18,
+          "F1-2.4",
+          0.0,
+          3000000.0,
+          0.0,
+          3000000.0
+        ]
+      },
+      {
+        "row": [
+          "1305",
+          "Investment in Other SACCOS and Second-Tier Organisations",
+          1,
+          19,
+          "F1-2.5",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "1403",
+          "Furniture, Fixtures and Equipment",
+          1,
+          20,
+          "F1-4.3",
+          0.0,
+          2000000.0,
+          0.0,
+          2000000.0
+        ]
+      },
+      {
+        "row": [
+          "1499",
+          "Accumulated Depreciation",
+          1,
+          21,
+          "F1-4.7",
+          0.0,
+          0.0,
+          150000.0,
+          -150000.0
+        ]
+      },
+      {
+        "row": [
+          "1501",
+          "Accounts Receivable (30 days or less)",
+          1,
+          22,
+          "F1-5.1",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "1506",
+          "Prepaid Expenses",
+          1,
+          23,
+          "F1-5.6",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "2101",
+          "Member Mandatory Savings (Akiba ya Lazima)",
+          2,
+          6,
+          "F1-8.1",
+          25000000.0,
+          0.0,
+          0.0,
+          25000000.0
+        ]
+      },
+      {
+        "row": [
+          "2102",
+          "Member Voluntary Savings (Akiba ya Hiari)",
+          2,
+          7,
+          "F1-8.1",
+          0.0,
+          0.0,
+          3000000.0,
+          3000000.0
+        ]
+      },
+      {
+        "row": [
+          "2103",
+          "Fixed Term Deposits (Amana za Muda Maalum)",
+          2,
+          24,
+          "F1-8.2",
+          0.0,
+          0.0,
+          2000000.0,
+          2000000.0
+        ]
+      },
+      {
+        "row": [
+          "2201",
+          "Unreconciled Payment Gateway Receipts",
+          2,
+          8,
+          "F1-9.7",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "2401",
+          "Accounts Payable (30 days or less)",
+          2,
+          25,
+          "F1-9.1",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "2402",
+          "Dividends Payable (Gawio)",
+          2,
+          26,
+          "F1-9.2",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "2403",
+          "Accrued Interest Payable on Savings",
+          2,
+          27,
+          "F1-9.3",
+          0.0,
+          0.0,
+          300000.0,
+          300000.0
+        ]
+      },
+      {
+        "row": [
+          "2405",
+          "Taxes Payable",
+          2,
+          28,
+          "F1-9.5",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "3101",
+          "Member Core Share Capital (Hisa za Msingi)",
+          3,
+          9,
+          "F1-10.1",
+          15000000.0,
+          0.0,
+          0.0,
+          15000000.0
+        ]
+      },
+      {
+        "row": [
+          "3102",
+          "Statutory Reserve Fund (Akiba ya Kisheria)",
+          3,
+          10,
+          "F1-10.7",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "3103",
+          "Retained Earnings (Past Years)",
+          3,
+          11,
+          "F1-10.8",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "4101",
+          "Loan Interest Income",
+          4,
+          12,
+          "F2-1.1",
+          0.0,
+          0.0,
+          750000.0,
+          750000.0
+        ]
+      },
+      {
+        "row": [
+          "4102",
+          "Loan Processing and Insurance Fees",
+          4,
+          13,
+          "F2-3.1",
+          0.0,
+          0.0,
+          80000.0,
+          80000.0
+        ]
+      },
+      {
+        "row": [
+          "4103",
+          "Membership Entry and Passbook Fees (Kiingilio)",
+          4,
+          14,
+          "F2-3.1",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "4104",
+          "Penalties",
+          4,
+          30,
+          "F2-3.2",
+          0.0,
+          0.0,
+          40000.0,
+          40000.0
+        ]
+      },
+      {
+        "row": [
+          "4105",
+          "Other Non-Interest Income",
+          4,
+          31,
+          "F2-3.3",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "4202",
+          "Interest Income - Deposits in Financial Institutions",
+          4,
+          29,
+          "F2-1.3",
+          900000.0,
+          0.0,
+          210000.0,
+          1110000.0
+        ]
+      },
+      {
+        "row": [
+          "4301",
+          "Recoveries on Written-Off Loans",
+          4,
+          32,
+          "F2-5.2",
+          0.0,
+          0.0,
+          100000.0,
+          100000.0
+        ]
+      },
+      {
+        "row": [
+          "5101",
+          "Interest Expense on Member Savings",
+          5,
+          15,
+          "F2-2.2",
+          0.0,
+          300000.0,
+          0.0,
+          300000.0
+        ]
+      },
+      {
+        "row": [
+          "5201",
+          "Loan Loss Provision Expense",
+          5,
+          16,
+          "F2-5.1",
+          0.0,
+          1500000.0,
+          0.0,
+          1500000.0
+        ]
+      },
+      {
+        "row": [
+          "5301",
+          "Salaries and Wages",
+          5,
+          33,
+          "F2-4.1",
+          400000.0,
+          1800000.0,
+          0.0,
+          2200000.0
+        ]
+      },
+      {
+        "row": [
+          "5302",
+          "Other Personnel Costs and Benefits",
+          5,
+          34,
+          "F2-4.2",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "5303",
+          "Office Occupancy (Rent)",
+          5,
+          35,
+          "F2-4.3",
+          0.0,
+          600000.0,
+          0.0,
+          600000.0
+        ]
+      },
+      {
+        "row": [
+          "5304",
+          "Operations Expenses",
+          5,
+          36,
+          "F2-4.4",
+          0.0,
+          90000.0,
+          0.0,
+          90000.0
+        ]
+      },
+      {
+        "row": [
+          "5305",
+          "Professional Fees and Services",
+          5,
+          37,
+          "F2-4.5",
+          0.0,
+          250000.0,
+          0.0,
+          250000.0
+        ]
+      },
+      {
+        "row": [
+          "5306",
+          "Depreciation",
+          5,
+          38,
+          "F2-4.6",
+          0.0,
+          150000.0,
+          0.0,
+          150000.0
+        ]
+      },
+      {
+        "row": [
+          "5307",
+          "Maintenance and Repairs",
+          5,
+          39,
+          "F2-4.7",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "5308",
+          "Other Operating Expenses",
+          5,
+          40,
+          "F2-4.8",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "balancesQuarter": {
+    "columnHeaders": [
+      {
+        "columnName": "gl_code"
+      },
+      {
+        "columnName": "account_name"
+      },
+      {
+        "columnName": "account_type"
+      },
+      {
+        "columnName": "account_id"
+      },
+      {
+        "columnName": "report_line"
+      },
+      {
+        "columnName": "opening_balance"
+      },
+      {
+        "columnName": "period_debit"
+      },
+      {
+        "columnName": "period_credit"
+      },
+      {
+        "columnName": "closing_balance"
+      }
+    ],
+    "data": [
+      {
+        "row": [
+          "1101",
+          "Cash at Vault and Teller",
+          1,
+          1,
+          "F1-3.1",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "1102",
+          "Settlement Account - Internal Payment Gateway",
+          1,
+          2,
+          "F1-3.2",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "1103",
+          "Bank Current Account",
+          1,
+          17,
+          "F1-3.2",
+          25570000.0,
+          910000.0,
+          2340000.0,
+          24140000.0
+        ]
+      },
+      {
+        "row": [
+          "1201",
+          "Gross Loan Portfolio - Development Loans",
+          1,
+          3,
+          "F1-1",
+          11200000.0,
+          2000000.0,
+          400000.0,
+          12800000.0
+        ]
+      },
+      {
+        "row": [
+          "1202",
+          "Gross Loan Portfolio - Emergency Loans",
+          1,
+          4,
+          "F1-1",
+          1500000.0,
+          0.0,
+          0.0,
+          1500000.0
+        ]
+      },
+      {
+        "row": [
+          "1299",
+          "Allowance for Loan Impairment",
+          1,
+          5,
+          "F1-1.7",
+          0.0,
+          0.0,
+          1000000.0,
+          -1000000.0
+        ]
+      },
+      {
+        "row": [
+          "1304",
+          "Fixed Deposits in Financial Institutions (over 30 days)",
+          1,
+          18,
+          "F1-2.4",
+          3000000.0,
+          0.0,
+          0.0,
+          3000000.0
+        ]
+      },
+      {
+        "row": [
+          "1305",
+          "Investment in Other SACCOS and Second-Tier Organisations",
+          1,
+          19,
+          "F1-2.5",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "1403",
+          "Furniture, Fixtures and Equipment",
+          1,
+          20,
+          "F1-4.3",
+          2000000.0,
+          0.0,
+          0.0,
+          2000000.0
+        ]
+      },
+      {
+        "row": [
+          "1499",
+          "Accumulated Depreciation",
+          1,
+          21,
+          "F1-4.7",
+          -150000.0,
+          0.0,
+          0.0,
+          -150000.0
+        ]
+      },
+      {
+        "row": [
+          "1501",
+          "Accounts Receivable (30 days or less)",
+          1,
+          22,
+          "F1-5.1",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "1506",
+          "Prepaid Expenses",
+          1,
+          23,
+          "F1-5.6",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "2101",
+          "Member Mandatory Savings (Akiba ya Lazima)",
+          2,
+          6,
+          "F1-8.1",
+          25000000.0,
+          0.0,
+          0.0,
+          25000000.0
+        ]
+      },
+      {
+        "row": [
+          "2102",
+          "Member Voluntary Savings (Akiba ya Hiari)",
+          2,
+          7,
+          "F1-8.1",
+          3000000.0,
+          0.0,
+          0.0,
+          3000000.0
+        ]
+      },
+      {
+        "row": [
+          "2103",
+          "Fixed Term Deposits (Amana za Muda Maalum)",
+          2,
+          24,
+          "F1-8.2",
+          2000000.0,
+          0.0,
+          0.0,
+          2000000.0
+        ]
+      },
+      {
+        "row": [
+          "2201",
+          "Unreconciled Payment Gateway Receipts",
+          2,
+          8,
+          "F1-9.7",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "2401",
+          "Accounts Payable (30 days or less)",
+          2,
+          25,
+          "F1-9.1",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "2402",
+          "Dividends Payable (Gawio)",
+          2,
+          26,
+          "F1-9.2",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "2403",
+          "Accrued Interest Payable on Savings",
+          2,
+          27,
+          "F1-9.3",
+          300000.0,
+          0.0,
+          0.0,
+          300000.0
+        ]
+      },
+      {
+        "row": [
+          "2405",
+          "Taxes Payable",
+          2,
+          28,
+          "F1-9.5",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "3101",
+          "Member Core Share Capital (Hisa za Msingi)",
+          3,
+          9,
+          "F1-10.1",
+          15000000.0,
+          0.0,
+          0.0,
+          15000000.0
+        ]
+      },
+      {
+        "row": [
+          "3102",
+          "Statutory Reserve Fund (Akiba ya Kisheria)",
+          3,
+          10,
+          "F1-10.7",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "3103",
+          "Retained Earnings (Past Years)",
+          3,
+          11,
+          "F1-10.8",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "4101",
+          "Loan Interest Income",
+          4,
+          12,
+          "F2-1.1",
+          450000.0,
+          0.0,
+          300000.0,
+          750000.0
+        ]
+      },
+      {
+        "row": [
+          "4102",
+          "Loan Processing and Insurance Fees",
+          4,
+          13,
+          "F2-3.1",
+          80000.0,
+          0.0,
+          0.0,
+          80000.0
+        ]
+      },
+      {
+        "row": [
+          "4103",
+          "Membership Entry and Passbook Fees (Kiingilio)",
+          4,
+          14,
+          "F2-3.1",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "4104",
+          "Penalties",
+          4,
+          30,
+          "F2-3.2",
+          40000.0,
+          0.0,
+          0.0,
+          40000.0
+        ]
+      },
+      {
+        "row": [
+          "4105",
+          "Other Non-Interest Income",
+          4,
+          31,
+          "F2-3.3",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "4202",
+          "Interest Income - Deposits in Financial Institutions",
+          4,
+          29,
+          "F2-1.3",
+          900000.0,
+          0.0,
+          210000.0,
+          1110000.0
+        ]
+      },
+      {
+        "row": [
+          "4301",
+          "Recoveries on Written-Off Loans",
+          4,
+          32,
+          "F2-5.2",
+          100000.0,
+          0.0,
+          0.0,
+          100000.0
+        ]
+      },
+      {
+        "row": [
+          "5101",
+          "Interest Expense on Member Savings",
+          5,
+          15,
+          "F2-2.2",
+          300000.0,
+          0.0,
+          0.0,
+          300000.0
+        ]
+      },
+      {
+        "row": [
+          "5201",
+          "Loan Loss Provision Expense",
+          5,
+          16,
+          "F2-5.1",
+          500000.0,
+          1000000.0,
+          0.0,
+          1500000.0
+        ]
+      },
+      {
+        "row": [
+          "5301",
+          "Salaries and Wages",
+          5,
+          33,
+          "F2-4.1",
+          2200000.0,
+          0.0,
+          0.0,
+          2200000.0
+        ]
+      },
+      {
+        "row": [
+          "5302",
+          "Other Personnel Costs and Benefits",
+          5,
+          34,
+          "F2-4.2",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "5303",
+          "Office Occupancy (Rent)",
+          5,
+          35,
+          "F2-4.3",
+          600000.0,
+          0.0,
+          0.0,
+          600000.0
+        ]
+      },
+      {
+        "row": [
+          "5304",
+          "Operations Expenses",
+          5,
+          36,
+          "F2-4.4",
+          0.0,
+          90000.0,
+          0.0,
+          90000.0
+        ]
+      },
+      {
+        "row": [
+          "5305",
+          "Professional Fees and Services",
+          5,
+          37,
+          "F2-4.5",
+          0.0,
+          250000.0,
+          0.0,
+          250000.0
+        ]
+      },
+      {
+        "row": [
+          "5306",
+          "Depreciation",
+          5,
+          38,
+          "F2-4.6",
+          150000.0,
+          0.0,
+          0.0,
+          150000.0
+        ]
+      },
+      {
+        "row": [
+          "5307",
+          "Maintenance and Repairs",
+          5,
+          39,
+          "F2-4.7",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          "5308",
+          "Other Operating Expenses",
+          5,
+          40,
+          "F2-4.8",
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  },
+  "loans": {
+    "columnHeaders": [
+      {
+        "columnName": "loan_id"
+      },
+      {
+        "columnName": "account_no"
+      },
+      {
+        "columnName": "product_name"
+      },
+      {
+        "columnName": "term_months"
+      },
+      {
+        "columnName": "restructured"
+      },
+      {
+        "columnName": "outstanding_principal"
+      },
+      {
+        "columnName": "days_overdue"
+      },
+      {
+        "columnName": "outstanding_12m_ago"
+      },
+      {
+        "columnName": "written_off_12m"
+      },
+      {
+        "columnName": "recovered_12m"
+      }
+    ],
+    "data": [
+      {
+        "row": [
+          1,
+          "L000001",
+          "Mkopo wa Maendeleo",
+          12.0,
+          0,
+          1200000.0,
+          6,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          2,
+          "L000002",
+          "Mkopo wa Maendeleo",
+          24.0,
+          0,
+          2400000.0,
+          72,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          3,
+          "L000003",
+          "Mkopo wa Dharura",
+          10.0,
+          0,
+          900000.0,
+          103,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          4,
+          "L000004",
+          "Mkopo wa Maendeleo",
+          36.0,
+          0,
+          3400000.0,
+          225,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          5,
+          "L000005",
+          "Mkopo wa Dharura",
+          6.0,
+          0,
+          600000.0,
+          482,
+          600000.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          6,
+          "L000006",
+          "Mkopo wa Maendeleo",
+          12.0,
+          1,
+          400000.0,
+          0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          7,
+          "L000007",
+          "Mkopo wa Maendeleo",
+          10.0,
+          0,
+          0.0,
+          0,
+          500000.0,
+          500000.0,
+          100000.0
+        ]
+      },
+      {
+        "row": [
+          8,
+          "L000008",
+          "Mkopo wa Maendeleo",
+          6.0,
+          0,
+          0.0,
+          0,
+          300000.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          9,
+          "L000009",
+          "Mkopo wa Maendeleo",
+          12.0,
+          0,
+          800000.0,
+          1,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "row": [
+          10,
+          "L000010",
+          "Mkopo wa Maendeleo",
+          48.0,
+          0,
+          4600000.0,
+          0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ]
+  }
+}

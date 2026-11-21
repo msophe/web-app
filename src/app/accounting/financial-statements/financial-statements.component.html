@@ -14,9 +14,16 @@
           <mat-form-field class="fs-kind">
             <mat-label>{{ t('form.statement') }}</mat-label>
             <mat-select formControlName="kind">
-              @for (k of kinds; track k) {
-                <mat-option [value]="k">{{ t('kind.' + k) }}</mat-option>
-              }
+              <mat-optgroup [label]="t('form.groupStatements')">
+                @for (k of kinds; track k) {
+                  <mat-option [value]="k">{{ t('kind.' + k) }}</mat-option>
+                }
+              </mat-optgroup>
+              <mat-optgroup [label]="t('form.groupTcdc')">
+                @for (k of tcdcKinds; track k) {
+                  <mat-option [value]="k">{{ t('kind.' + k) }}</mat-option>
+                }
+              </mat-optgroup>
             </mat-select>
           </mat-form-field>
 
@@ -56,12 +63,15 @@
             <mat-datepicker #endPicker></mat-datepicker>
           </mat-form-field>
 
-          @if (!showAccount() && kind() !== 'cash-flow') {
+          @if (!showAccount() && kind() !== 'cash-flow' && !isTcdc()) {
             <mat-checkbox formControlName="showZero">{{ t('form.showZero') }}</mat-checkbox>
           }
         </div>
         @if (kind() === 'balance-sheet') {
           <p class="fs-note">{{ t('form.fyNote') }}</p>
+        }
+        @if (isTcdc()) {
+          <p class="fs-note">{{ t('form.tcdcNote') }}</p>
         }
       </mat-card-content>
       <mat-card-actions class="layout-row align-end gap-5px responsive-column">
@@ -122,7 +132,7 @@
                     <td>{{ text }}</td>
                   }
                   @for (value of line.values; track $index) {
-                    <td class="num">{{ formatAmount(value) }}</td>
+                    <td class="num">{{ formatValue(value, s.columnFormats?.[$index]) }}</td>
                   }
                 </tr>
               }
@@ -130,7 +140,7 @@
           </table>
         </div>
 
-        @if (s.kind !== 'general-ledger' && s.kind !== 'cash-flow') {
+        @if (s.kind !== 'general-ledger' && s.kind !== 'cash-flow' && !s.kind.startsWith('tcdc')) {
           <p class="fs-note">{{ t('form.drillHint') }}</p>
         }
 

@@ -10,10 +10,20 @@
 export const REPORT_GL_BALANCES = 'TZ GL Balances';
 export const REPORT_GL_ACCOUNT_TRANSACTIONS = 'TZ GL Account Transactions';
 export const REPORT_CASH_FLOW = 'TZ Cash Flow';
+/** Phase 4: loan records behind TCDC Forms 1 and 3. */
+export const REPORT_LOAN_PORTFOLIO = 'TZ Loan Portfolio';
 
 /** Statements the screen can produce. */
 export type StatementKind =
-  'trial-balance' | 'balance-sheet' | 'income-statement' | 'changes-in-equity' | 'cash-flow' | 'general-ledger';
+  | 'trial-balance'
+  | 'balance-sheet'
+  | 'income-statement'
+  | 'changes-in-equity'
+  | 'cash-flow'
+  | 'general-ledger'
+  | 'tcdc-form-1'
+  | 'tcdc-form-2'
+  | 'tcdc-form-3';
 
 export const STATEMENT_KINDS: StatementKind[] = [
   'trial-balance',
@@ -23,6 +33,38 @@ export const STATEMENT_KINDS: StatementKind[] = [
   'cash-flow',
   'general-ledger'
 ];
+
+/** TCDC off-site returns (Phase 4). */
+export const TCDC_KINDS: StatementKind[] = [
+  'tcdc-form-1',
+  'tcdc-form-2',
+  'tcdc-form-3'
+];
+
+/** Statements worked out as at one date (no start date to choose). */
+export const AS_AT_KINDS: StatementKind[] = [
+  'balance-sheet',
+  ...TCDC_KINDS
+];
+
+/** One row of the "TZ Loan Portfolio" report. */
+export interface LoanRow {
+  loanId: number;
+  accountNo: string;
+  productName: string;
+  /** Original contractual term in months. */
+  termMonths: number;
+  restructured: boolean;
+  /** Outstanding principal as at the reporting date. */
+  outstanding: number;
+  daysOverdue: number;
+  outstanding12mAgo: number;
+  writtenOff12m: number;
+  recovered12m: number;
+}
+
+/** How a numeric column is shown: an amount (default), a count, or a percentage. */
+export type ColumnFormat = 'amount' | 'count' | 'percent';
 
 /** Fineract GL account types. */
 export const ASSET = 1;
@@ -103,6 +145,8 @@ export interface Statement {
   checks: StatementCheck[];
   /** GL codes of accounts with a balance but no TCDC line tag. */
   untaggedAccounts: string[];
+  /** One entry per numeric column. Omitted means every column is an amount. */
+  columnFormats?: ColumnFormat[];
 }
 
 /** Details printed in the header and footer of an exported statement. */

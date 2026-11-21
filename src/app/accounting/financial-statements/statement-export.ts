@@ -16,7 +16,7 @@ import autoTable from 'jspdf-autotable';
 import * as ExcelJS from 'exceljs';
 
 import { LineKind, Statement, StatementMeta, Translate } from './financial-statements.model';
-import { formatAmount } from './statement-builder';
+import { formatAmount, formatValue } from './statement-builder';
 
 /** Statements with this many numeric columns or more are printed in landscape. */
 const LANDSCAPE_FROM_COLUMNS = 3;
@@ -125,7 +125,11 @@ export function exportStatementPdf(statement: Statement, meta: StatementMeta, t:
   for (let i = numericStart; i < columnCount; i++) {
     columnStyles[i] = { halign: 'right', cellWidth: landscape ? 30 : 34 };
   }
-  if (statement.textColumns[0] === t('col.code')) {
+  if ([
+      t('col.code'),
+      t('col.line'),
+      t('col.item')
+    ].includes(statement.textColumns[0]) && statement.textColumns.length > 1) {
     columnStyles[0] = { cellWidth: 16 };
   }
 
@@ -140,7 +144,7 @@ export function exportStatementPdf(statement: Statement, meta: StatementMeta, t:
     ],
     body: statement.lines.map((line) => [
       ...line.texts,
-      ...line.values.map((value) => formatAmount(value))
+      ...line.values.map((value, i) => formatValue(value, statement.columnFormats?.[i]))
     ]),
     theme: 'plain',
     styles: { fontSize: 8.5, cellPadding: 1.4, overflow: 'linebreak' },
@@ -229,7 +233,14 @@ export function exportStatementPdf(statement: Statement, meta: StatementMeta, t:
 export function buildStatementWorkbook(statement: Statement, meta: StatementMeta, t: Translate): ExcelJS.Workbook {
   const workbook = new ExcelJS.Workbook();
   workbook.creator = meta.preparedBy || 'Mifos X';
-  const sheet = workbook.addWorksheet(statement.title.substring(0, 31), {
+  // Excel sheet names cannot contain * ? : \ / [ ] and are limited to 31 characters.
+  const sheetName = statement.title
+    .replace(/[*?:\\/[\]]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .substring(0, 31)
+    .trim();
+  const sheet = workbook.addWorksheet(sheetName || 'Statement', {
     pageSetup: { paperSize: 9, orientation: 'landscape', fitToPage: true, fitToWidth: 1, fitToHeight: 0 }
   });
   const columnCount = statement.textColumns.length + statement.numericColumns.length;
@@ -263,13 +274,16 @@ export function buildStatementWorkbook(statement: Statement, meta: StatementMeta
   statement.lines.forEach((line) => {
     const row = sheet.addRow([
       ...line.texts,
-      ...line.values.map((value) => (value === null ? null : value))
+      ...line.values.map((value, i) =>
+        value === null ? null : statement.columnFormats?.[i] === 'percent' ? value / 100 : value
+      )
     ]);
     const bold = line.kind !== 'account' && line.kind !== 'subtotal';
     row.eachCell({ includeEmpty: true }, (cell, col) => {
       cell.font = { bold, italic: line.kind === 'subtotal' };
       if (col > numericStart) {
-        cell.numFmt = numberFormat;
+        const format = statement.columnFormats?.[col - numericStart - 1] ?? 'amount';
+        cell.numFmt = format === 'count' ? '#,##0' : format === 'percent' ? '0%' : numberFormat;
       }
       if (line.kind === 'grand-total' || line.kind === 'total') {
         cell.border = { top: { style: 'thin' }, bottom: { style: line.kind === 'grand-total' ? 'double' : 'thin' } };
@@ -284,7 +298,12 @@ export function buildStatementWorkbook(statement: Statement, meta: StatementMeta
   sheet.addRow([meta.generatedText]);
 
   statement.textColumns.forEach((name, index) => {
-    sheet.getColumn(index + 1).width = name === t('col.code') ? 10 : name === t('col.date') ? 12 : 44;
+    sheet.getColumn(index + 1).width =
+      name === t('col.code') || name === t('col.line') || name === t('col.item')
+        ? 10
+        : name === t('col.date')
+          ? 12
+          : 60;
   });
   statement.numericColumns.forEach((_, index) => (sheet.getColumn(numericStart + index + 1).width = 18));
   sheet.views = [{ state: 'frozen', ySplit: titleRows.length + 2 }];

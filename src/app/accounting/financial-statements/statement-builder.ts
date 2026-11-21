@@ -16,6 +16,7 @@
 import {
   ASSET,
   BalanceRow,
+  ColumnFormat,
   CashFlowRow,
   EQUITY,
   EXPENSE,
@@ -795,6 +796,22 @@ export function financialYearStart(date: Date, startMonth: number): Date {
   const month = Math.min(Math.max(Math.round(startMonth) || 1, 1), 12) - 1;
   const year = date.getMonth() >= month ? date.getFullYear() : date.getFullYear() - 1;
   return new Date(year, month, 1);
+}
+
+/**
+ * Formats a numeric cell according to its column format.
+ */
+export function formatValue(value: number | null | undefined, format: ColumnFormat = 'amount'): string {
+  if (value === null || value === undefined) {
+    return '';
+  }
+  if (format === 'count') {
+    return Math.round(value).toLocaleString('en-US');
+  }
+  if (format === 'percent') {
+    return `${round2(value)}%`;
+  }
+  return formatAmount(value);
 }
 
 /**

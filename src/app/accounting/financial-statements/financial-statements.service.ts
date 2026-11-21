@@ -15,11 +15,14 @@ import {
   BalanceRow,
   CashFlowRow,
   LedgerRow,
+  LoanRow,
   REPORT_CASH_FLOW,
+  REPORT_LOAN_PORTFOLIO,
   REPORT_GL_ACCOUNT_TRANSACTIONS,
   REPORT_GL_BALANCES
 } from './financial-statements.model';
 import { toBalanceRows, toCashFlowRows, toLedgerRows } from './statement-builder';
+import { toLoanRows } from './tcdc-forms';
 
 /**
  * Runs the Phase 3 reports registered in Fineract. Dates are sent as yyyy-MM-dd, the format Fineract
@@ -55,6 +58,11 @@ export class FinancialStatementsService {
       endDate,
       GLAccountNO: glAccountId
     }).pipe(map(toLedgerRows));
+  }
+
+  /** Loan records as at the date (Phase 4, TCDC Forms 1 and 3). */
+  getLoanPortfolio(officeId: number, endDate: string): Observable<LoanRow[]> {
+    return this.run(REPORT_LOAN_PORTFOLIO, { officeId, endDate }).pipe(map(toLoanRows));
   }
 
   getOffices(): Observable<any[]> {

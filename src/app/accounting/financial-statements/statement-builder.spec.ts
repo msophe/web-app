@@ -19,7 +19,7 @@ jest.mock('exceljs', () => require('exceljs/dist/exceljs.min.js'));
 
 import fixture from './statement-builder.fixture.json';
 import { statementLabels } from './financial-statements.labels';
-import { Statement } from './financial-statements.model';
+import { Statement, StatementMeta } from './financial-statements.model';
 import {
   buildBalanceSheet,
   buildCashFlow,
@@ -153,6 +153,22 @@ describe('statement builder', () => {
     const sw = statementLabels('sw-SW');
     expect(sw('title.balanceSheet')).toBe('Taarifa ya Hali ya Fedha');
     expect(sw('no.such.key')).toBe('no.such.key');
+  });
+
+  it('builds an Excel workbook for the general ledger, whose title contains a colon', () => {
+    const gl = buildGeneralLedger(toLedgerRows(fixture.ledger1103), '1103 Bank Current Account', t);
+    const meta: StatementMeta = {
+      entityName: 'Kilimo SACCOS Ltd',
+      officeName: 'Head Office',
+      periodText: '',
+      currencyCode: 'TZS',
+      preparedBy: 'mifos',
+      generatedText: '',
+      signatureLabels: [],
+      signatureFieldLabels: []
+    };
+    const sheet = buildStatementWorkbook(gl, meta, t).worksheets[0];
+    expect(sheet.name).toBe('General Ledger 1103 Bank Curren');
   });
 
   it('builds an Excel workbook with numeric cells', () => {
